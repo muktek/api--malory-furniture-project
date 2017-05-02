@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "init-project" : "npm run remove-origin && npm run set-project-name && install",
-    "remove-origin" : "if which git ; then git remote remove origin;",
+    "remove-origin" : "git remote remove origin || true",
     "start": "node --use_strict server.js",
     "go": "npm-run-all --parallel dev-server",
     "dev-server": "NODE_ENV=development nodemon server.js --watch server.js --watch src-server",
