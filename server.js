@@ -1,7 +1,5 @@
-//IMPORTS
-//import webpack + webpack middleware;
-global.chalk = require('chalk')
-global.PROJECT_NAME = require('./src-server/config/projectName.js')
+const chalk = require('chalk')
+const PROJECT_NAME = require('./src-server/config/projectName.js')
 
 if(typeof PROJECT_NAME !== 'string' ){ 
 	require('./src-server/cli/setProjectName.js')
@@ -10,7 +8,8 @@ if(typeof PROJECT_NAME !== 'string' ){
 
 const	bodyParser = require('body-parser')
 const express = require('express') //import express web server
-const renderFile = require('ejs').renderFile //import view templating engine 
+const cors = require('cors')
+
 const connectToDB = require('./src-server/db/db-connect.js') //connect to db
 
 const indexRouter = require('./src-server/routes/indexRouter.js')
@@ -22,30 +21,14 @@ const apiRouter = require('./src-server/routes/apiRouter.js')
 // =========
 const app = express()
 
-
 //configure bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-
-
+app.use(cors())
 
 // set port if exists in environment for heroku or live site, else set to 3000 for dev
 const PORT = process.env.PORT || 3000
 app.set('port', PORT)
-
-
-//CONFIGURING TEMPLATING ENGINE FOR .HTML
-//-----------------------
-app.set('views', './dist');
-app.engine('html', renderFile)
-app.set('view engine', 'html');
-
-// CONFIGURING STATIC FILES  (js, css, images)
-// ------------------------------
-// js, css, and imafiles from dist/assets/
-app.use( express.static( `${__dirname}/dist`) );
-
 
 // ------------------------------
 // Wire up the router

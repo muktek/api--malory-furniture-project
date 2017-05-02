@@ -4,7 +4,8 @@ const {getIndex, makeProxyRequest} = require('../controllers/indexController');
 
 const indexRouter = Router();
 
-indexRouter.get('/', getIndex )
+
 indexRouter.get('/proxy', makeProxyRequest )
+indexRouter.get('/', getIndex)
 
 module.exports = indexRouter
