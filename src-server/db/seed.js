@@ -1,4 +1,4 @@
-const mongoose = require( 'backbone');
+const mongoose = require('mongoose');
 const connectToDB = require('./db-connect.js')
 const PROJECT_NAME = require('../config/projectName.js')
 const axios = require('axios')
@@ -18,16 +18,21 @@ let dataSet = [
 
 ]
 
+let savedRecordCount = 0
+
 console.log('connecting to db.....', PROJECT_NAME)
 connectToDB(PROJECT_NAME, (err, result)=>{
-	dataSet.forEach((dataRecord)=>{
-		//   SEED ACTION ON EACH RECORD HERE
-		// 	dataRecord.sold = false 
+    SomeModel.remove({}, () => {
+    dataSet.forEach((dataRecord) => {
+  		//   SEED ACTION ON EACH RECORD HERE
+  		// 	dataRecord.sold = false 
 
       let record = new SomeModel(dataRecord)
-		record.save((err, savedRecord)=>{
-			if (err) console.log(err)
-			console.log('saved: ' + savedRecord._id )
-		 }) 
-	})
+  		record.save((err, savedRecord) => {
+  			if (err) console.log(err)
+  			console.log('saved: ' + savedRecord._id )
+        if(++savedRecordCount === dataSet.length) process.exit()
+  		 }) 
+  	})
+  })
 })

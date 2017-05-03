@@ -10,7 +10,9 @@
     "go": "npm-run-all --parallel dev-server",
     "dev-server": "NODE_ENV=development nodemon server.js --watch server.js --watch src-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "set-project-name": "node ./src-server/cli/setProjectName.js"
+    "set-project-name": "node ./src-server/cli/setProjectName.js",
+    "seed:dev": "NODE_ENV=development node --use_strict ./src-server/db/seed.js",
+    "seed:prod": "node --use_strict ./src-server/db/seed.js"
   },
   "author": "",
   "license": "ISC",
