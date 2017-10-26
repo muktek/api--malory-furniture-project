@@ -1,25 +1,12 @@
-#Simple Backend + React/ES6 Setup
+# Simple API Backend
 
-##Setup 
+```sh
+# (1) Clone this repo
 
-##### 1. Clone this repo
-```
-git clone git@github.com:t3tools/webpack-es6-and-scss.git «your-projet»
-```
+git clone https://github.com/t3tools/micro-nosql-backend-api.git «your-project»
 
-##### 2. Install the packages
-```
+# (2) Install Packages
 npm install
-```
 
-##### 3. Run the taskrunner & run the local server
-- Task Runner
-```
-npm run go
-```
-
-##### 4. Workflow
-Do scss and javascript work in the `src-client/` directory. It will compile to the `dist/` with the taskrunner.
-
-`index.html` pages are served out of the `dist/`
-
+# (3) Run the local server + file-watcher
+npm run dev
