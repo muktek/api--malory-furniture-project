@@ -27,7 +27,7 @@ const itemSchema = new Schema({
     match: [/^(average|good|excellent)$/, 'Only values are: average, good, excellent']
   },
   onSale: {
-     type: String, required: true
+     type: Boolean, required: true
   }
 
 })

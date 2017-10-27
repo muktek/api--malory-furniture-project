@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const chalk = require('chalk');
 const connectToDB = require('./db-connect.js')
 const fs = require('fs')
 const parse = require('csv-parse/lib/sync')
 const ProductModel = require('./models/productModel');
+
 
 let dotEnvPath
 switch(process.env.NODE_ENV){
@@ -40,9 +42,8 @@ let dataSet = csvData.map((item)=>{
 	 dbItem.condition = item.condition
 	 dbItem.description = item.description
 	 dbItem.imageLink = `https://mallory-furniture-static.now.sh/product-images/${item.img_name}.jpg`
-	 dbItem.onSale = item.onSale === 'TRUE'
+	 dbItem.onSale = item.on_sale === 'TRUE' ? true : false
 
-	console.log(dbItem.item,'--',dbItem.condition.match(/^(average|good|excellent)$/))
 	return dbItem
 })
 
@@ -61,7 +62,6 @@ let dataSet = csvData.map((item)=>{
 // ]
 
 let savedRecordCount = 0
-console.log(dataSet)
 console.log('connecting to db.....', process.env.DATABASE_URL)
 connectToDB( process.env.DATABASE_URL, (err, result)=>{
     ProductModel.remove({}, () => {

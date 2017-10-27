@@ -4,8 +4,9 @@ const apiRouter = Router()
 /*
  * NOTE: the model for the data-table should not have the name 'SomeModel'
  */
-let FurnitureModel = require('../db/models/furnitureModel.js')
-let apiController = require('../controllers/apiController.js')(FurnitureModel)
+let ProductModel = require('../db/models/productModel.js')
+let apiController = require('../controllers/apiController.js')(ProductModel)
+
 let {	getMany, getOne, 	createOne,	updateOne, deleteOne} = apiController
 
 apiRouter

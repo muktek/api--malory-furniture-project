@@ -1,10 +1,23 @@
 const chalk = require('chalk')
-const PROJECT_NAME = require('./src/config/projectName.js')
 
-if(typeof PROJECT_NAME !== 'string' ){
-	require('./src/cli/setProjectName.js')
-	throw new Error(`\n${chalk.bgRed.bold('There must be a project name exported from :')} ${chalk.grey.bold('./src/config/projectName.js')} \n ${chalk.bgWhite.black(' you must execute: ')} ${chalk.cyan.bold('npm run set-project-name')}` )
+let dotEnvPath
+switch(process.env.NODE_ENV){
+	case 'development':
+		dotEnvPath = `${__dirname}/variables.dev.env`
+		break;
+
+	case 'production':
+		dotEnvPath = `${__dirname}/variables.prod.env`
+		break;
+
+	default:
+	  console.log(chalk.red('Node environment must be provided.'));
+		process.exit();
 }
+
+require('dotenv').config({
+	path: dotEnvPath
+})
 
 const	bodyParser = require('body-parser')
 const express = require('express') //import express web server
@@ -17,6 +30,7 @@ const apiRouter = require('./src/routes/apiRouter.js')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+
 
 // =========
 // RUN APP
@@ -36,15 +50,16 @@ app.use(express.static(`${__dirname}/public`));
 // ------------------------------
 // Wire up the router
 // ------------------------------
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, false, {}, `.swagger-ui .topbar {background: #000;} .topbar a {visibility: hidden;}`, null, 'Mallory Furniture ApI'));
-app.use('/api', apiRouter)
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, false, {}, `.swagger-ui .topbar {background: #000;} .topbar a {visibility: hidden;}`, null, 'Mallory Furniture ApI'));
+app.use('/api/v1', apiRouter)
 
 
 //---------------------
 //EXECUTION SCRIPTS
 //---------------------
 //Connect to DB
-// connectToDB(PROJECT_NAME)
+console.log(process.env)
+connectToDB(process.env.DATABASE_URL)
 
 //Tell Server to listen @ port-location
 app.listen(PORT, function() {
