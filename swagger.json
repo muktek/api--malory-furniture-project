@@ -1,0 +1,103 @@
+
+{
+  "info":{
+    "title" : "Mallory Furniture Admin API",
+    "description": "Backend for accessing Mallory furniture data"
+  },
+  "tags": [
+    {
+      "name": "products",
+      "description": "The furniture resource"
+    }
+  ],
+  "schemes" : ["http" , "https"],
+  "host": "mallory-furniture-admin.now.sh",
+  "basePath": "/api/v1/",
+  "paths" : {
+    "/products" : {
+      "get":{
+        "tags" : ["products"],
+        "summary" : "Returns an array of furniture-product objects",
+        "description" : " **Example Use :**\t [`https://mallory-furniture-admin.now.sh/api/v1/products`](https://mallory-furniture-admin.now.sh/api/v1/products)",
+        "parameters" : [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by categories: \n **Format :**\t`?category=[categoryName]`\n**Example :** \t [`https://mallory-furniture-admin.now.sh/api/v1/products?category=storage`](https://mallory-furniture-admin.now.sh/api/v1/products?category=storage)",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "multi"
+            }
+          ],
+        "responses" : {
+          "200" : {
+            "description" : "A JSON Array of product objects",
+            "schema": {
+                "type" : "array",
+                "items" : {
+                  "$ref":"#/definitions/Product"
+                }
+            }
+          },
+          "400" : {
+            "description" : "User Error"
+          }
+        }
+      }
+    },
+    "/products/{_id}," : {
+      "get":{
+        "tags" : ["products"],
+        "summary" : "Returns a product object for a given {_id}",
+        "description" : " **Example Use :**\t [`https://mallory-furniture-admin.now.sh/api/v1/products/82n291`](https://mallory-furniture-admin.now.sh/api/v1/products/82n291)",
+        "responses" : {
+          "200" : {
+            "description" : "A JSON Array of product objects",
+            "schema": {
+                "type" : "array",
+                "items" : {
+                  "$ref":"#/definitions/Product"
+                }
+            }
+          },
+          "400" : {
+            "description" : "User Error"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions" : {
+    "Product":{
+       "type":"object",
+       "properties":{
+          "_id":{
+             "type":"string",
+             "example" : "nYrnfYEv"
+          },
+          "title":{
+             "type":"string",
+             "example" : "Ligne Roset GUEST Dining Arm Chair"
+          },
+          "price":{
+             "type":"integer",
+             "example" : 800
+          },
+          "length":{
+             "type": "integer",
+             "example" : 35
+          },
+          "width":{
+             "type": "integer",
+             "example" : 31
+          },
+          "height":{
+             "type": "integer",
+             "example" : 28
+          }
+
+        }
+      }
+    }
+}
