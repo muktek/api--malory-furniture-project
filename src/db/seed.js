@@ -42,7 +42,7 @@ let dataSet = csvData.map((item)=>{
 	 dbItem.condition = item.condition
 	 dbItem.description = item.description
 	 dbItem.imageLink = `https://mallory-furniture-static.now.sh/product-images/${item.img_name}.jpg`
-	 dbItem.onSale = item.on_sale === 'TRUE' ? true : false
+	 dbItem.onSale = Math.random() > .8 ? true : false
 
 	return dbItem
 })
