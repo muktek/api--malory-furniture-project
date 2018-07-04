@@ -2,7 +2,7 @@ function apiController(SomeModel){
 
 	function getMany(req, res){
 	  SomeModel.find(req.query , function(err, results){
-		 if(err) return res.send(err).status(500)
+		 if(err) return res.status(500).send(err)
 		 res.json(results)
 	  })
 	}

@@ -35,6 +35,9 @@
   },
   "now": {
     "alias": "mallory-furniture-admin",
-    "dotenv": "variables.prod.env"
+    "dotenv": "variables.prod.env",
+    "files": [
+      "variables.prod.env",
+    ]
   }
 }

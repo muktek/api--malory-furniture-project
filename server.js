@@ -10,7 +10,7 @@ switch(process.env.NODE_ENV){
 		dotEnvPath = `${__dirname}/variables.prod.env`
 		break;
 
-	default:
+	default:	
 	  console.log(chalk.red('Node environment must be provided.'));
 		process.exit();
 }
