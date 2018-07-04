@@ -50,6 +50,14 @@ app.use(express.static(`${__dirname}/public`));
 // ------------------------------
 // Wire up the router
 // ------------------------------
+
+app.get('/', (req, res)=>{
+  res.json({
+		"docs" : "https://mallory-furniture-admin.now.sh/docs/",
+		"api" : "https://mallory-furniture-admin.now.sh/api/v1/"
+	})
+});
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, false, {}, `.swagger-ui .topbar {background: #000;} .topbar a {visibility: hidden;}`, null, 'Mallory Furniture ApI'));
 app.use('/api/v1', apiRouter)
 

@@ -49,7 +49,7 @@
       "get":{
         "tags" : ["products"],
         "summary" : "Returns a product object for a given {_id}",
-        "description" : " **Example Use :**\t [`https://mallory-furniture-admin.now.sh/api/v1/products/82n291`](https://mallory-furniture-admin.now.sh/api/v1/products/82n291)",
+        "description" : " **Example Use :**\t [`https://mallory-furniture-admin.now.sh/api/v1/products/SkwebWxWB0b`](https://mallory-furniture-admin.now.sh/api/v1/products/SkwebWxWB0b)",
         "responses" : {
           "200" : {
             "description" : "A JSON Array of product objects",
@@ -61,7 +61,7 @@
             }
           },
           "400" : {
-            "description" : "User Error"
+            "description" : "no record found with that id"
           }
         }
       }
@@ -74,29 +74,44 @@
        "properties":{
           "_id":{
              "type":"string",
-             "example" : "nYrnfYEv"
+             "example" : "SkwebWxWB0b"
           },
-          "title":{
+          "item":{
              "type":"string",
-             "example" : "Ligne Roset GUEST Dining Arm Chair"
+             "example" : "Herman Miller Eames Lounge Chair"
           },
           "price":{
              "type":"integer",
-             "example" : 800
+             "example" : 7500
           },
           "length":{
              "type": "integer",
-             "example" : 35
+             "example" : 32
           },
           "width":{
              "type": "integer",
-             "example" : 31
+             "example" : 32
           },
           "height":{
              "type": "integer",
-             "example" : 28
+             "example" : 32
+          },
+          "condition":{
+             "type": "string",
+             "example" : "good"
+          },
+          "category":{
+             "type": "string",
+             "example" : "seating"
+          },
+          "onSale":{
+             "type": "boolean",
+             "example" : false
+          },
+          "featured":{
+             "type": "boolean",
+             "example" : true
           }
-
         }
       }
     }
